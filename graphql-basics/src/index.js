@@ -1,36 +1,11 @@
 import { GraphQLServer } from "graphql-yoga";
-
-/* Type definitions (schema) */
-const typeDefs = `
-  type Query {
-    me: User!
-  }
-
-  type User {
-    id: ID!
-    name: String!
-    email: String!
-    age: Int
-  }
-`;
-
-/* Resolvers */
-const resolvers = {
-  Query: {
-    me() {
-      return {
-        id: "adfasdfasdf",
-        name: "Steve",
-        email: "test@test.com",
-        age: 30
-      };
-    }
-  }
-};
+import Query from "./resolvers/query";
 
 const server = new GraphQLServer({
-  typeDefs,
-  resolvers
+  typeDefs: "./src/schema.graphql",
+  resolvers: {
+    Query
+  }
 });
 
 server.start(() => {
